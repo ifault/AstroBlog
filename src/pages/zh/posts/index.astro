@@ -1,13 +1,14 @@
 ---
 import { changeLanguage } from "i18next";
-import { getCollection, getEntries } from "astro:content";
+import { getCollection } from "astro:content";
 import Posts from "@layouts/Posts.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPagination from "@utils/getPagination";
-import { getEnglishBlogs } from "@content/config";
-changeLanguage("en");
+import { getChineseBlogs } from "@content/config";
 
-const posts = await getEnglishBlogs("blog");
+changeLanguage("zh");
+
+const posts = await getChineseBlogs("blog");
 const sortedPosts = getSortedPosts(posts);
 const pagination = getPagination({
     posts: sortedPosts,

@@ -2,7 +2,7 @@
 import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
-
+import { LanguageSelector } from "astro-i18next/components";
 export interface Props {
   activeNav?: "posts" | "tags" | "about" | "search";
 }
@@ -54,8 +54,8 @@ const { activeNav } = Astro.props;
             <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
           </svg>
         </button>
-        <ul id="menu-items" class="display-none sm:flex">
-          <li>
+               <ul id="menu-items" class="display-none sm:flex">
+                    <li>
             <a href="/posts" class={activeNav === "posts" ? "active" : ""}>
               Posts
             </a>
@@ -70,6 +70,12 @@ const { activeNav } = Astro.props;
               About
             </a>
           </li>
+          <li>
+            <LanguageSelector
+            showFlag={false}
+            languageMapping={{ en: "English" }}
+            class="my-class"
+          />
           <li>
             <LinkButton
               href="/search"
@@ -108,7 +114,7 @@ const { activeNav } = Astro.props;
               )
             }
           </li>
-        </ul>
+                  </ul>
       </nav>
     </div>
   </div>
@@ -185,6 +191,9 @@ const { activeNav } = Astro.props;
   }
   .menu-icon.is-active .close {
     @apply opacity-100;
+  }
+  .my-class{
+    @apply opacity-100 bg-skin-fill  text-skin-base;
   }
 </style>
 

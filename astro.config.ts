@@ -5,11 +5,12 @@ import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
-
+import astroI18next from "astro-i18next";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
   integrations: [
+    astroI18next(),
     tailwind({
       applyBaseStyles: false,
     }),

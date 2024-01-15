@@ -1,6 +1,6 @@
 import { SITE } from "@config";
 import { defineCollection, z } from "astro:content";
-
+import { getCollection } from "astro:content";
 const blog = defineCollection({
   type: "content",
   schema: ({ image }) =>
@@ -24,3 +24,27 @@ const blog = defineCollection({
 });
 
 export const collections = { blog };
+export async function getEnglishBlogs() {
+	const englishDocsEntries = await getCollection('blog', ({ id }) => {
+    return !id.includes('/')
+  });
+	return englishDocsEntries.map((post) => {
+		const slug = post.slug.split('/')[0];
+		return {
+			...post,
+			slug
+		}
+	})
+}
+export async function getChineseBlogs() {
+	const englishDocsEntries = await getCollection('blog', ({ id }) => {
+    return id.startsWith('zh/')
+  });
+	return englishDocsEntries.map((post) => {
+		const slug = post.slug.split('/')[0];
+		return {
+			...post,
+			slug
+		}
+	})
+}

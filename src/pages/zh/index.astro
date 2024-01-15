@@ -1,7 +1,6 @@
 ---
 import { changeLanguage } from "i18next";
 import { getCollection } from "astro:content";
-import {getEnglishBlogs} from "../content/config";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -11,11 +10,11 @@ import Card from "@components/Card";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { SOCIALS } from "@config";
+import { getChineseBlogs } from "@content/config";
 
-changeLanguage("en");
+changeLanguage("zh");
 
-// const posts = await getCollection("blog");
-const posts  =await getEnglishBlogs()
+const posts = await getChineseBlogs("blog");
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const socialCount = SOCIALS.filter(social => social.active).length;

@@ -6,17 +6,17 @@ import PostDetails from "@layouts/PostDetails.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
-import { getEnglishBlogs } from "@content/config";
+import { getChineseBlogs } from "@content/config";
 
-changeLanguage("en");
+changeLanguage("zh");
 
 export interface Props {
     post: CollectionEntry<"blog">;
 }
 export async function getStaticPaths() {
-    const posts = await getEnglishBlogs("blog", ({ data }) => !data.draft);
+    const posts = await getChineseBlogs("blog", ({ data }) => !data.draft);
     const postResult = posts.map(post => ({
-        params: { slug: post.slug },
+        params: { slug: post.slug.split("/")[1] },
         props: { post },
     }));
     const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 }
 const { slug } = Astro.params;
 const { post } = Astro.props;
-const posts = await getEnglishBlogs("blog");
+const posts = await getChineseBlogs("blog");
 const sortedPosts = getSortedPosts(posts);
 const pagination = getPagination({
     posts: sortedPosts,
