@@ -16,7 +16,7 @@ export interface Props {
 export async function getStaticPaths() {
     const posts = await getChineseBlogs("blog", ({ data }) => !data.draft);
     const postResult = posts.map(post => ({
-        params: { slug: post.slug.split("/")[1] },
+        params: { slug: post.slug },
         props: { post },
     }));
     const pagePaths = getPageNumbers(posts.length).map(pageNum => ({

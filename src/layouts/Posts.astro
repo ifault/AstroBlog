@@ -1,4 +1,5 @@
 ---
+import i18next from "i18next";
 import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
@@ -22,9 +23,15 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>
       {
-        paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}`} frontmatter={data} />
-        ))
+        paginatedPosts.map(({ data, slug }) => {
+          console.log(i18next.language);
+          
+          if (i18next.language == "en") {
+            return <Card href={`/posts/${slug}`} frontmatter={data} />;
+          } else {
+            return <Card href={`/${i18next.language}/posts/${slug}`} frontmatter={data} />;
+          }
+        })
       }
     </ul>
   </Main>

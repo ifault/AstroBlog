@@ -25,26 +25,26 @@ const blog = defineCollection({
 
 export const collections = { blog };
 export async function getEnglishBlogs() {
-	const englishDocsEntries = await getCollection('blog', ({ id }) => {
-    return !id.includes('/')
+  const englishDocsEntries = await getCollection("blog", ({ id }) => {
+    return !id.includes("/");
   });
-	return englishDocsEntries.map((post) => {
-		const slug = post.slug.split('/')[0];
-		return {
-			...post,
-			slug
-		}
-	})
+  return englishDocsEntries.map(post => {
+    const slug = post.slug.split("/")[0];
+    return {
+      ...post,
+      slug,
+    };
+  });
 }
 export async function getChineseBlogs() {
-	const englishDocsEntries = await getCollection('blog', ({ id }) => {
-    return id.startsWith('zh/')
+  const englishDocsEntries = await getCollection("blog", ({ id }) => {
+    return id.startsWith("zh/");
   });
-	return englishDocsEntries.map((post) => {
-		const slug = post.slug.split('/')[0];
-		return {
-			...post,
-			slug
-		}
-	})
+  return englishDocsEntries.map(post => {
+    const slug = post.slug.split("/")[1];
+    return {
+      ...post,
+      slug,
+    };
+  });
 }
